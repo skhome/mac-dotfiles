@@ -1,0 +1,25 @@
+
+# syntax-highlight JSON strings or files
+function json() {
+	if [ -p /dev/stdin ]
+	then
+		# piping, e.g. `echo '{"foo":42}' | json`
+		python -mjson.tool | pygmentize -l json
+	else
+		# e.g. `json '{"foo":42}'`
+		python -mjson.tool <<< "$*" | pygmentize -l json
+	fi
+}
+
+# export the given branch of this repo into a compressed archive
+function gitexport() {
+	git archive "$1" | gzip > "$1.tar.gz"
+}
+
+# get gzipped size
+function gz() {
+	orig=`cat "$1" | wc -c`
+	compr=`gzip -c "$1" | wc -c`
+	echo "original size   (bytes): ${orig}"
+	echo "compressed size (bytes): ${compr}"
+}

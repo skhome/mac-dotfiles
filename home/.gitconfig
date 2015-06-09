@@ -1,0 +1,26 @@
+[alias]
+	co = checkout
+	st = status
+	pu = push
+	fe = fetch --prune
+	df = diff --color
+	ls = log --color --oneline --pretty=format:'%C(yellow bold)%h%Creset -%C(red bold)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%C(yellow bold)%h%Creset -%C(red bold)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+[color "branch"]
+	current = green bold
+	local = yellow
+	remote = red
+[color "diff"]
+	old = red bold
+	new = green bold
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+[merge]
+	log = true
+[rerere]
+	enabled = true
