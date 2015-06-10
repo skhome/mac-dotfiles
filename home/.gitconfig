@@ -1,26 +1,69 @@
 [alias]
-	co = checkout
-	st = status
-	pu = push
-	fe = fetch --prune
-	df = diff --color
-	ls = log --color --oneline --pretty=format:'%C(yellow bold)%h%Creset -%C(red bold)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit
-	lg = log --color --graph --pretty=format:'%C(yellow bold)%h%Creset -%C(red bold)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit
+    # some shortcuts
+    co = checkout
+    st = status
+    fe = fetch --prune
+    df = diff --color
+
+    # show verbose output about tags, branches or remotes
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+
+    # colored logs
+    ls = log --color --oneline --pretty=format:'%C(yellow bold)%h%Creset -%C(red bold)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%C(yellow bold)%h%Creset -%C(red bold)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit
+
+    # Amend the currently staged files to the latest commit
+    amend = commit --amend --reuse-message=HEAD
+
 [core]
-	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
+    # use custom .gitignore and .gitattributes
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
+
+    # Make `git rebase` safer on OS X (see http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/ )
+    trustctime = false
+
+    # prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+    precomposeunicode = false
+
+[color]
+    # Use colors in Git commands that are capable of colored output when
+    # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+    ui = auto
+
 [color "branch"]
-	current = green bold
-	local = yellow
-	remote = red
+    current = yellow bold
+    local = yellow
+    remote = green
+
 [color "diff"]
-	old = red bold
-	new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = green
+
 [color "status"]
-	added = green
-	changed = yellow
-	untracked = cyan
+    added = green
+    changed = yellow
+    untracked = cyan
+
+[diff]
+    # detect copies as well as renames
+    renames = copies
+
 [merge]
-	log = true
+    # include summaries of merged commits in newly created merge commit messages
+    log = true
+
+[push]
+    # use GIT 2.0 simple method that only pushes the current branch
+    default = simple
+
+    # make `git push` push relevant annotated tags when pushing branches out
+    followTags = true
+
 [rerere]
-	enabled = true
+    enabled = true
